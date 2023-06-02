@@ -17,7 +17,7 @@ public class ShopRepository {
                 flag = true;
             }
         }
-        if (flag == true) {
+        if (flag) {
             throw new AlreadyExistsException(
                     "Товар с данным ID: " + productToAdd.id + "уже существует"
             );
@@ -30,18 +30,6 @@ public class ShopRepository {
         return products;
     }
 
-    public void remove(int id) {
-        Product[] tmp = new Product[products.length - 1];
-        int copyToIndex = 0;
-        for (Product product : products) {
-            if (product.getId() != id) {
-                tmp[copyToIndex] = product;
-                copyToIndex++;
-            }
-        }
-        products = tmp;
-    }
-
     public Product findByID(int id) {
         for (Product product : products) {
             if (product.getId() == id) {
@@ -52,7 +40,6 @@ public class ShopRepository {
     }
 
     public void removeByID(int id) {
-        Product productToRemove;
         Product[] tmp = new Product[products.length - 1];
         int productNumber = 0;
         if (findByID(id) == null) {
